@@ -12,7 +12,7 @@
   "author": "Alexey Raspopov (https://github.com/alexeyraspopov)",
   "license": "MIT",
   "dependencies": {
-    "complexity-report": "^1.0.2",
+    "complexity-report": "^0.6.2",
     "map-stream": "^0.1.0",
     "gulp-util": "^2.2.14"
   },
