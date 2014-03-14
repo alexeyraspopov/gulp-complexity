@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A JavaScript complexity analysis gulp task",
   "main": "index.js",
+  "keywords": [
+    "gulpplugin"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,5 +15,9 @@
     "complexity-report": "^1.0.2",
     "map-stream": "^0.1.0",
     "gulp-util": "^2.2.14"
+  },
+  "devDependencies": {
+    "gulp-jshint": "^1.5.0",
+    "gulp": "^3.5.6"
   }
 }

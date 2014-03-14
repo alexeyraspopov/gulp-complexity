@@ -1,0 +1,9 @@
+{
+	"undef": true,
+	"unused": true,
+	"globals": {
+		"require": true,
+		"module": true,
+		"exports": true
+	}
+}
