@@ -3,8 +3,13 @@ var gulp = require('gulp'),
 	complexity = require('./index');
 
 gulp.task('default', function(){
-	return gulp.src(['index.js', 'test.js'])
-		// .pipe(jshint())
-		// .pipe(jshint.reporter('jshint-stylish'))
+	return gulp.src('index.js')
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(complexity());
+});
+
+gulp.task('test', function(){
+	return gulp.src('test.js')
 		.pipe(complexity());
 });
