@@ -1,5 +1,16 @@
-var map = require('map-stream'),
-	PluginError = require('gulp-util').PluginError;
+/* jshint node:true */
+var cr = require('complexity-report'),
+	map = require('map-stream'),
+	gutil = require('gulp-util'),
+	PluginError = gutil.PluginError;
+
+function log(file, report){
+	console.log(' ');
+	console.log(file.path);
+	console.log('    ', 'maintainability:', report.maintainability.toFixed(2));
+	console.log('    ', 'cyclomatic:', report.aggregate.complexity.cyclomatic);
+	console.log('    ', 'halstead difficulty:', report.aggregate.complexity.halstead.difficulty);
+}
 
 function complexity(options){
 	options = options || {
@@ -16,6 +27,10 @@ function complexity(options){
 		if(file.isStream()){
 			return cb(new PluginError('gulp-complexity', 'Streaming not supported'));
 		}
+
+		var report = cr.run(file.contents.toString(), options);
+
+		log(file, report);
 
 		cb(null, file);
 	});
