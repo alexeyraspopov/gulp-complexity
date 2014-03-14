@@ -1,0 +1,16 @@
+{
+  "name": "gulp-complexity",
+  "version": "0.0.1",
+  "description": "A JavaScript complexity analysis gulp task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexey Raspopov (https://github.com/alexeyraspopov)",
+  "license": "MIT",
+  "dependencies": {
+    "complexity-report": "^1.0.2",
+    "map-stream": "^0.1.0",
+    "gulp-util": "^2.2.14"
+  }
+}
