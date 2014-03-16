@@ -2,15 +2,15 @@
 var multiline, template, reportTemplate, reportFn;
 
 multiline = require('multiline');
-template = require('underscore').template;
+template = require('string-interpolate');
 
 reportTemplate = multiline(function(){/*
-<%= chalk.styles.yellow.open %><%= '\u2717' %> <%= path %>:<%= line %> - <%= name %> is too complicated<%= chalk.styles.yellow.close %>
-    Cyclomatic: <%= complexity.cyclomatic %>
-    Halstead: <%= complexity.halstead.difficulty %>
-      | Effort: <%= complexity.halstead.effort %>
-      | Volume: <%= complexity.halstead.volume %>
-      | Vocabulary: <%= complexity.halstead.vocabulary %>
+{ chalk.styles.yellow.open }{ nope } { path }:{ line } - { name } is too complicated{ chalk.styles.yellow.close }
+    Cyclomatic: { complexity.cyclomatic }
+    Halstead: { complexity.halstead.difficulty }
+      | Effort: { complexity.halstead.effort }
+      | Volume: { complexity.halstead.volume }
+      | Vocabulary: { complexity.halstead.vocabulary }
 */});
 
 reportFn = template(reportTemplate);
@@ -33,7 +33,8 @@ exports.log = function(file, report, options, fittedName){
 			line: fn.line,
 			name: fn.name,
 			complexity: fn.complexity,
-			chalk: chalk
+			chalk: chalk,
+			nope: '\u2717'
 		};
 	}).forEach(function(report){
 		valid = false;

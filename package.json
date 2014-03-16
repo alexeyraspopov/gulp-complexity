@@ -15,9 +15,9 @@
     "complexity-report": "^0.6.2",
     "gulp-util": "^2.2.14",
     "chalk": "^0.4.0",
-    "underscore": "^1.6.0",
     "multiline": "^0.2.0",
-    "through2": "^0.4.1"
+    "through2": "^0.4.1",
+    "string-interpolate": "^0.1.0"
   },
   "devDependencies": {
     "gulp-jshint": "^1.5.0",
