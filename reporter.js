@@ -1,3 +1,4 @@
+/* jshint node:true */
 var multiline, template, reportTemplate, reportFn;
 
 multiline = require('multiline');
@@ -14,9 +15,13 @@ reportTemplate = multiline(function(){/*
 
 reportFn = template(reportTemplate);
 
-exports.log = function(file, report, options){
+exports.log = function(file, report, options, fittedName){
 	var chalk = require('chalk'),
-		path = require('path');
+		path = require('path'),
+		name = path.relative(file.cwd, file.path),
+		helpers = require('./reporter-helpers');
+
+	console.log(fittedName, helpers.generateBar(report.maintainability, options.maintainability));
 
 	report.functions.filter(function(fn){
 		var cyclomatic = fn.complexity.cyclomatic,
@@ -25,7 +30,7 @@ exports.log = function(file, report, options){
 		return cyclomatic > options.cyclomatic[0] || halstead.difficulty > options.halstead[0];
 	}).map(function(fn){
 		return {
-			path: path.relative(file.cwd, file.path),
+			path: name,
 			line: fn.line,
 			name: fn.name,
 			complexity: fn.complexity,
