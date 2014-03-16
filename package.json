@@ -1,6 +1,6 @@
 {
   "name": "gulp-complexity",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A JavaScript complexity analysis gulp task",
   "main": "index.js",
   "keywords": [
@@ -10,7 +10,7 @@
     "complexity",
     "report",
     "analysis",
-    "analyze",
+    "analyze"
   ],
   "author": "Alexey Raspopov (https://github.com/alexeyraspopov)",
   "repository": {
