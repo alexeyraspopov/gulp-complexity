@@ -5,7 +5,7 @@ multiline = require('multiline');
 template = require('underscore').template;
 
 reportTemplate = multiline(function(){/*
-<%= chalk.styles.yellow.open %><%= path %>:<%= line %> - <%= name %> is too complicated<%= chalk.styles.yellow.close %>
+<%= chalk.styles.yellow.open %><%= '\u2717' %> <%= path %>:<%= line %> - <%= name %> is too complicated<%= chalk.styles.yellow.close %>
     Cyclomatic: <%= complexity.cyclomatic %>
     Halstead: <%= complexity.halstead.difficulty %>
       | Effort: <%= complexity.halstead.effort %>
@@ -19,9 +19,8 @@ exports.log = function(file, report, options, fittedName){
 	var chalk = require('chalk'),
 		path = require('path'),
 		name = path.relative(file.cwd, file.path),
-		helpers = require('./reporter-helpers');
-
-	console.log(fittedName, helpers.generateBar(report.maintainability, options.maintainability));
+		helpers = require('./reporter-helpers'),
+		valid = true;
 
 	report.functions.filter(function(fn){
 		var cyclomatic = fn.complexity.cyclomatic,
@@ -37,6 +36,11 @@ exports.log = function(file, report, options, fittedName){
 			chalk: chalk
 		};
 	}).forEach(function(report){
+		valid = false;
 		console.log(reportFn(report));
 	});
+
+	if(valid){
+		console.log(chalk.green('\u2713'), fittedName, helpers.generateBar(report.maintainability, options.maintainability));
+	}
 };
