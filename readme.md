@@ -4,13 +4,9 @@
 
 *Twin brother of [grunt-complexity](https://github.com/vigetlabs/grunt-complexity) task*
 
-***NOTE: Work In Progress***
-
 ## Install
 
-**TODO**: register package
-
-	npm install --save-dev alexeyraspopov/gulp-complexity
+	npm install --save-dev gulp-complexity
 
 ## Example
 

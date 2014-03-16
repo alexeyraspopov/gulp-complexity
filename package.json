@@ -1,15 +1,22 @@
 {
   "name": "gulp-complexity",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A JavaScript complexity analysis gulp task",
   "main": "index.js",
   "keywords": [
-    "gulpplugin"
+    "gulpplugin",
+    "halstead",
+    "cyclomatic",
+    "complexity",
+    "report",
+    "analysis",
+    "analyze",
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Alexey Raspopov (https://github.com/alexeyraspopov)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexeyraspopov/gulp-complexity.git"
+  },
   "license": "MIT",
   "dependencies": {
     "complexity-report": "^0.6.2",
