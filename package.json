@@ -1,6 +1,6 @@
 {
   "name": "gulp-complexity",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A JavaScript complexity analysis gulp task",
   "main": "index.js",
   "keywords": [
