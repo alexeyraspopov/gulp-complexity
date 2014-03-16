@@ -1,6 +1,7 @@
 /* jshint node:true */
 var cr = require('complexity-report'),
 	map = require('map-stream'),
+	through = require('through2'),
 	gutil = require('gulp-util'),
 	reporter = require('./reporter'),
 	PluginError = gutil.PluginError;
@@ -12,7 +13,9 @@ function complexity(options){
 		maintainability: 100
 	};
 
-	return map(function(file, cb){
+	var files = [];
+
+	return through.obj(function(file, enc, cb){
 		if(file.isNull()){
 			return cb(null, file);
 		}
@@ -21,11 +24,24 @@ function complexity(options){
 			return cb(new PluginError('gulp-complexity', 'Streaming not supported'));
 		}
 
-		var report = cr.run(file.contents.toString(), options);
-
-		reporter.log(file, report, options);
-
+		files.push(file);
 		cb(null, file);
+	}, function(cb){
+		var path = require('path'),
+			helpers = require('./reporter-helpers');
+
+		maxLength = helpers.longestString(files.map(function(file){
+			return path.relative(file.cwd, file.path);
+		}));
+
+		files.forEach(function(file){
+			var base = path.relative(file.cwd, file.path);
+			var report = cr.run(file.contents.toString(), options);
+
+			reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
+		})
+
+		cb();
 	});
 }
 
