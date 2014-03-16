@@ -1,6 +1,5 @@
 /* jshint node:true */
 var cr = require('complexity-report'),
-	map = require('map-stream'),
 	through = require('through2'),
 	gutil = require('gulp-util'),
 	reporter = require('./reporter'),
@@ -30,7 +29,7 @@ function complexity(options){
 		var path = require('path'),
 			helpers = require('./reporter-helpers');
 
-		maxLength = helpers.longestString(files.map(function(file){
+		var maxLength = helpers.longestString(files.map(function(file){
 			return path.relative(file.cwd, file.path);
 		}));
 
@@ -39,7 +38,7 @@ function complexity(options){
 			var report = cr.run(file.contents.toString(), options);
 
 			reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
-		})
+		});
 
 		cb();
 	});

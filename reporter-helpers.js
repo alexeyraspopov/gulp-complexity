@@ -1,3 +1,4 @@
+/* jshint node:true */
 exports.fitWhitespace = function(maxLength, string){
 	// Prevent negative values from breaking the array
 	var remaining = Math.max(0, maxLength - string.length);
