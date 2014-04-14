@@ -2,16 +2,17 @@
 var cr = require('complexity-report'),
 	through = require('through2'),
 	gutil = require('gulp-util'),
+	extend = require('util-extend'),
 	reporter = require('./reporter'),
 	PluginError = gutil.PluginError;
 
 function complexity(options){
-	options = options || {
+	options = extend({
 		cyclomatic: [3, 7, 12],
 		halstead: [8, 13, 20],
 		maintainability: 100,
     breakOnErrors: true 
-	};
+	}, options);
 
 	var files = [];
   var errorCount = 0;

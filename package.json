@@ -27,7 +27,8 @@
     "chalk": "^0.4.0",
     "multiline": "^0.2.0",
     "through2": "^0.4.1",
-    "string-interpolate": "^0.1.0"
+    "string-interpolate": "^0.1.0",
+    "util-extend": "^1.0.1"
   },
   "devDependencies": {
     "gulp-jshint": "^1.5.0",
