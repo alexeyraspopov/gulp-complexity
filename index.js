@@ -11,11 +11,11 @@ function complexity(options){
 		cyclomatic: [3, 7, 12],
 		halstead: [8, 13, 20],
 		maintainability: 100,
-    breakOnErrors: true 
+		breakOnErrors: true 
 	}, options);
 
 	var files = [];
-  var errorCount = 0;
+	var errorCount = 0;
 
 	return through.obj(function(file, enc, cb){
 		if(file.isNull()){
@@ -40,17 +40,17 @@ function complexity(options){
 			var base = path.relative(file.cwd, file.path);
 			var report = cr.run(file.contents.toString(), options);
 
-      errorCount += report.functions.length;
-      if (report.maintainability < options.maintainability) {
-        errorCount++;
-      }
+			errorCount += report.functions.length;
+			if (report.maintainability < options.maintainability) {
+				errorCount++;
+			}
 
 			reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
 		});
 
-    if(options.breakOnErrors && errorCount > 0) {
-      this.emit('error', new PluginError('gulp-complexity', 'Complexity too high'));
-    }
+		if(options.breakOnErrors && errorCount > 0) {
+			this.emit('error', new PluginError('gulp-complexity', 'Complexity too high'));
+		}
 
 		cb();
 	});
