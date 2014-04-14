@@ -20,6 +20,8 @@
 
 ## Options
 
+Bool `breakOnErrors` - Fail the task when files or functions are too complex. Default: true
+
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License) (c) Alexey Raspopov
