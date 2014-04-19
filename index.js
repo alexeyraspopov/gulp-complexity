@@ -40,9 +40,13 @@ function complexity(options){
 			var base = path.relative(file.cwd, file.path);
 			var report = cr.run(file.contents.toString(), options);
 
-			errorCount += report.functions.length;
-			if (report.maintainability < options.maintainability) {
-				errorCount++;
+			if (options.breakOnErrors) {
+				var complicatedFunctions = report.functions.filter(isFunctionComplicated);
+				errorCount += complicatedFunctions.length;
+
+				if (report.maintability < options.maintainability) {
+					errorCount += 1;
+				}
 			}
 
 			reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
@@ -54,6 +58,12 @@ function complexity(options){
 
 		cb();
 	});
+
+	function isFunctionComplicated(fnInfo) {
+		return fnInfo.complexity.cyclomatic > options.cyclomatic[0] ||
+			fnInfo.complexity.halstead.difficulty > options.halstead[0];
+	}
 }
 
 module.exports = complexity;
+
