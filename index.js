@@ -11,7 +11,7 @@ function complexity(options){
 		cyclomatic: [3, 7, 12],
 		halstead: [8, 13, 20],
 		maintainability: 100,
-		breakOnErrors: true 
+		breakOnErrors: true
 	}, options);
 
 	var files = [];
@@ -40,7 +40,9 @@ function complexity(options){
 			var base = path.relative(file.cwd, file.path);
 			var report = cr.run(file.contents.toString(), options);
 
-			errorCount += report.functions.length;
+			errorCount += report.functions.filter(function(data){
+				return (data.complexity.cyclomatic > options.cyclomatic[0]) || (data.complexity.halstead.difficulty > options.halstead[0]);
+			}).length;
 			if (report.maintainability < options.maintainability) {
 				errorCount++;
 			}
