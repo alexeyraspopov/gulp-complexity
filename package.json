@@ -13,10 +13,7 @@
     "analyze"
   ],
   "author": "Alexey Raspopov (https://github.com/alexeyraspopov)",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/alexeyraspopov/gulp-complexity.git"
-  },
+  "repository": "alexeyraspopov/gulp-complexity",
   "scripts": {
     "test": "gulp test"
   },
@@ -27,11 +24,11 @@
     "chalk": "^0.4.0",
     "multiline": "^0.2.0",
     "through2": "^0.4.1",
-    "string-interpolate": "^0.1.0",
+    "string-interpolate": "^0.1.1",
     "util-extend": "^1.0.1"
   },
   "devDependencies": {
-    "gulp": "^3.5.6",
+    "gulp": "^3.8.7",
     "gulp-jshint": "^1.5.0",
     "jshint-stylish": "^0.1.5"
   }
