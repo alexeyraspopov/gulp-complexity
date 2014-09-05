@@ -15,12 +15,12 @@ function complexity(options){
 	}, options);
 
 	// always making sure threasholds are arrays
-	if( !Array.isArray( options.cyclomatic ) ) {
-		options.cyclomatic = [ options.cyclomatic ];
+	if(!Array.isArray(options.cyclomatic)){
+		options.cyclomatic = [options.cyclomatic];
 	}
 
-	if( !Array.isArray( options.halstead ) ) {
-		options.halstead = [ options.halstead ];
+	if(!Array.isArray(options.halstead)){
+		options.halstead = [options.halstead];
 	}
 
 	var files = [];
