@@ -23,8 +23,8 @@ exports.log = function(file, report, options, fittedName){
 		valid = true;
 
 	report.functions.filter(function(fn){
-		var cyclomatic = fn.complexity.cyclomatic,
-			halstead = fn.complexity.halstead;
+		var cyclomatic = fn.cyclomatic,
+			halstead = fn.halstead;
 
 		return cyclomatic > options.cyclomatic[0] || halstead.difficulty > options.halstead[0];
 	}).map(function(fn){
@@ -32,7 +32,7 @@ exports.log = function(file, report, options, fittedName){
 			path: name,
 			line: fn.line,
 			name: fn.name,
-			complexity: fn.complexity,
+			complexity: fn,
 			chalk: chalk,
 			nope: '\u2717'
 		};

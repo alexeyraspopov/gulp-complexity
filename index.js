@@ -1,6 +1,6 @@
 /* jshint node:true */
-var cr = require('complexity-report'),
-	through = require('through2'),
+var comp = require('escomplex-js');
+var through = require('through2'),
 	gutil = require('gulp-util'),
 	extend = require('util-extend'),
 	reporter = require('./reporter'),
@@ -47,10 +47,10 @@ function complexity(options){
 
 		files.forEach(function(file){
 			var base = path.relative(file.cwd, file.path);
-			var report = cr.run(file.contents.toString(), options);
+			var report = comp.analyse(file.contents.toString(), options);
 
 			errorCount += report.functions.filter(function(data){
-				return (data.complexity.cyclomatic > options.cyclomatic[0]) || (data.complexity.halstead.difficulty > options.halstead[0]);
+				return (data.cyclomatic > options.cyclomatic[0]) || (data.halstead.difficulty > options.halstead[0]);
 			}).length;
 			if (report.maintainability < options.maintainability) {
 				errorCount++;
