@@ -15,16 +15,16 @@
   "author": "Alexey Raspopov (https://github.com/alexeyraspopov)",
   "repository": "alexeyraspopov/gulp-complexity",
   "scripts": {
-    "test": "gulp test"
+    "test": "echo 0"
   },
   "license": "MIT",
   "dependencies": {
-    "escomplex-js": "https://npm.fury.io/GTpAPYjxGn3jnpGRdN3L/thotjs/escomplex-js/-/latest.tgz",
-    "gulp-util": "^2.2.14",
     "chalk": "^0.4.0",
+    "escomplex-js": "git://github.com/PropelJS/escomplex-js",
+    "gulp-util": "^2.2.14",
     "multiline": "^0.2.0",
-    "through2": "^0.4.1",
     "string-interpolate": "^0.1.1",
+    "through2": "^0.4.1",
     "util-extend": "^1.0.1"
   },
   "devDependencies": {
