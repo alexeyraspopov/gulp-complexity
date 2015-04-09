@@ -46,8 +46,13 @@ function complexity(options){
 		}));
 
 		files.forEach(function(file){
+			var contents = file.contents.toString();			
+			if (contents.length === 0) {
+				// skip empty file and continue
+				return;
+			}
 			var base = path.relative(file.cwd, file.path);
-			var report = cr.run(file.contents.toString(), options);
+			var report = cr.run(contents, options);
 
 			errorCount += report.functions.filter(function(data){
 				return (data.complexity.cyclomatic > options.cyclomatic[0]) || (data.complexity.halstead.difficulty > options.halstead[0]);
