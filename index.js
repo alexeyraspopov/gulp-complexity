@@ -45,7 +45,9 @@ function complexity(options){
 			return path.relative(file.cwd, file.path);
 		}));
 
-		files.forEach(function(file){
+		files.filter(function(file){
+			return file.contents.toString().length > 0;
+		}).forEach(function(file){
 			var base = path.relative(file.cwd, file.path);
 			var report = cr.run(file.contents.toString(), options);
 
