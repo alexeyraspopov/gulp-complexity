@@ -1,8 +1,9 @@
 /* jshint node:true */
-var multiline, template, reportTemplate, reportFn;
+var multiline, template, reportTemplate, gutil, reportFn;
 
 multiline = require('multiline');
 template = require('string-interpolate');
+gutil = require('gulp-util');
 
 reportTemplate = multiline(function(){/*
 { chalk.styles.yellow.open }{ nope } { path }:{ line } - { name } is too complicated{ chalk.styles.yellow.close }
@@ -38,10 +39,10 @@ exports.log = function(file, report, options, fittedName){
 		};
 	}).forEach(function(report){
 		valid = false;
-		console.log(reportFn(report));
+		gutil.log(reportFn(report));
 	});
 
 	if(valid){
-		console.log(chalk.green('\u2713'), fittedName, helpers.generateBar(report.maintainability, options.maintainability));
+		gutil.log(chalk.green('\u2713'), fittedName, helpers.generateBar(report.maintainability, options.maintainability));
 	}
 };
