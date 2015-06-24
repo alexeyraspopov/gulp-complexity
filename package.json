@@ -1,7 +1,7 @@
 {
   "name": "gulp-complexity",
   "version": "0.3.0",
-  "description": "A JavaScript complexity analysis gulp task",
+  "description": "A JavaScript & CoffeeScript complexity analysis gulp task",
   "main": "index.js",
   "keywords": [
     "gulpplugin",
@@ -15,17 +15,19 @@
   "author": "Alexey Raspopov (https://github.com/alexeyraspopov)",
   "repository": "alexeyraspopov/gulp-complexity",
   "scripts": {
-    "test": "gulp test"
+    "test": "echo 0"
   },
   "license": "MIT",
   "dependencies": {
-    "complexity-report": "^0.6.2",
-    "gulp-util": "^2.2.14",
     "chalk": "^0.4.0",
+    "escomplex": "1.2.x",
+    "escomplex-coffee": "0.3.x",
+    "escomplex-js": "1.2.x",
+    "gulp-util": "^2.2.14",
+    "lodash": "^3.9.3",
     "multiline": "^0.2.0",
-    "through2": "^0.4.1",
     "string-interpolate": "^0.1.1",
-    "util-extend": "^1.0.1"
+    "through2": "^0.4.1"
   },
   "devDependencies": {
     "gulp": "^3.8.7",
