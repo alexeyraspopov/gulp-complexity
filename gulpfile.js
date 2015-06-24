@@ -11,6 +11,6 @@ gulp.task('default', function(){
 
 gulp.task('test', function(){
 	return gulp.src(['test.js', 'index.js', 'reporter.js', 'reporter-helpers.js'])
-		.pipe(complexity())
+		.pipe(complexity({doCoffee:false}))
 		// .pipe(gulp.dest('build'));
 });
