@@ -3,14 +3,14 @@ var gulp = require('gulp'),
 	complexity = require('./index');
 
 gulp.task('default', function(){
-	return gulp.src(['index.js', 'reporter.js', 'reporter-helpers.js'])
+	return gulp.src('src/*')
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(complexity());
 });
 
 gulp.task('test', function(){
-	return gulp.src(['test.js', 'index.js', 'reporter.js', 'reporter-helpers.js'])
-		.pipe(complexity({doCoffee:false}))
+	return gulp.src(['test/*', 'index.js', 'src/*'])
+		.pipe(complexity())
 		// .pipe(gulp.dest('build'));
 });

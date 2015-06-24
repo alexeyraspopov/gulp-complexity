@@ -7,22 +7,8 @@ var _ = require('lodash');
 
 var through = require('through2'),
 	gutil = require('gulp-util'),
-	reporter = require('./reporter'),
+	reporter = require('./src/reporter'),
 	PluginError = gutil.PluginError;
-
-// merge the array of reports together and rerun through the code to compute aggregates
-function mergeResults(jsRes, coffeeRes) {
-  if (!coffeeRes) {
-    return jsRes;
-  }
-
-	if(!jsRes)
-		jsRes = [];
-
-  jsRes.reports = jsRes.reports.concat(coffeeRes.reports);
-
-  return escomplex.processResults(jsRes, cli.nocoresize || false);
-};
 
 function complexity(options){
 	var internalOpts = ['doCoffee', 'doJS'];
@@ -66,7 +52,7 @@ function complexity(options){
 		cb(null, file);
 	}, function(cb){
 		var path = require('path'),
-			helpers = require('./reporter-helpers');
+			helpers = require('./src/reporter-helpers');
 
 		var maxLength = helpers.longestString(files.map(function(file){
 			return path.relative(file.cwd, file.path);
@@ -75,18 +61,19 @@ function complexity(options){
 		files.forEach(function(file){
 			var base = path.relative(file.cwd, file.path);
 			var jsReport, coffeeReport, report,
-				files = file.contents.toString();
+				fileAsString = file.contents.toString();
 
-			if (internalOptions.doCoffee) {
+			if (internalOptions.doCoffee && _.contains(base, '.coffee')) {
         // if we have coffeescript,
-        // we will be merning results
+        // we will be merning resultsi
         // and recalculating all the values.
         // skipping the calculation here saves on computation
         options.skipCalculation = true;
-        coffeeReport = compCoffee.analyse(files, options);
+        report = compCoffee.analyse(fileAsString, options);
       }
-      jsReport = compJs.analyse(files, options);
-      report = mergeResults(jsReport, coffeeReport);
+      if (_.contains(base, '.js'))
+				report = compJs.analyse(fileAsString, options);
+
 
 			errorCount += report.functions.filter(function(data){
 				return (data.cyclomatic > options.cyclomatic[0]) || (data.halstead.difficulty > options.halstead[0]);
