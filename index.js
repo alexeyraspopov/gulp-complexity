@@ -11,7 +11,8 @@ function complexity(options){
 		cyclomatic: [3, 7, 12],
 		halstead: [8, 13, 20],
 		maintainability: 100,
-		breakOnErrors: true
+		breakOnErrors: true,
+		verbose: true
 	}, options);
 
 	// always making sure threasholds are arrays
@@ -48,8 +49,9 @@ function complexity(options){
 		files.filter(function(file){
 			return file.contents.toString().length > 0;
 		}).forEach(function(file){
-			var base = path.relative(file.cwd, file.path);
-			var report = cr.run(file.contents.toString(), options);
+			var base = path.relative(file.cwd, file.path),
+			    report = cr.run(file.contents.toString(), options),
+			    initialErrorCount = errorCount;
 
 			errorCount += report.functions.filter(function(data){
 				return (data.complexity.cyclomatic > options.cyclomatic[0]) || (data.complexity.halstead.difficulty > options.halstead[0]);
@@ -58,7 +60,9 @@ function complexity(options){
 				errorCount++;
 			}
 
-			reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
+			if (errorCount != initialErrorCount || options.verbose) {
+				reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
+			}
 		});
 
 		if(options.breakOnErrors && errorCount > 0) {
