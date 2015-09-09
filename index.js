@@ -64,7 +64,7 @@ function complexity(options){
 			});
 		});
 		options.reporters.forEach(function(reporter){
-			reporter.flush();
+			reporter.flush(options);
 		});
 
 		if(options.breakOnErrors && errorCount > 0) {
