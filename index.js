@@ -11,7 +11,8 @@ function complexity(options){
 		cyclomatic: [3, 7, 12],
 		halstead: [8, 13, 20],
 		maintainability: 100,
-		breakOnErrors: true
+		breakOnErrors: true,
+		reporters: [reporter]
 	}, options);
 
 	// always making sure threasholds are arrays
@@ -58,7 +59,12 @@ function complexity(options){
 				errorCount++;
 			}
 
-			reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
+			options.reporters.forEach(function(reporter){
+				reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
+			});
+		});
+		options.reporters.forEach(function(reporter){
+			reporter.flush();
 		});
 
 		if(options.breakOnErrors && errorCount > 0) {

@@ -46,3 +46,5 @@ exports.log = function(file, report, options, fittedName){
 		gutil.log(chalk.green('\u2713'), fittedName, helpers.generateBar(report.maintainability, options.maintainability));
 	}
 };
+
+exports.flush = function() {};
