@@ -49,18 +49,19 @@ function complexity(options){
 		files.filter(function(file){
 			return file.contents.toString().length > 0;
 		}).forEach(function(file){
-			var base = path.relative(file.cwd, file.path),
-			    report = cr.run(file.contents.toString(), options),
-			    initialErrorCount = errorCount;
+			var base = path.relative(file.cwd, file.path);
+			var report = cr.run(file.contents.toString(), options);
+			var initialErrorCount = errorCount;
 
 			errorCount += report.functions.filter(function(data){
 				return (data.complexity.cyclomatic > options.cyclomatic[0]) || (data.complexity.halstead.difficulty > options.halstead[0]);
 			}).length;
+
 			if (report.maintainability < options.maintainability) {
 				errorCount++;
 			}
 
-			if (errorCount != initialErrorCount || options.verbose) {
+			if (errorCount !== initialErrorCount || options.verbose) {
 				reporter.log(file, report, options, helpers.fitWhitespace(maxLength, base));
 			}
 		});
